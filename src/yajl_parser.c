@@ -31,8 +31,12 @@
 
 #define MAX_VALUE_TO_MULTIPLY ((LLONG_MAX / 10) + (LLONG_MAX % 10))
 
-#pragma clang diagnostic ignored "-Wfloat-equal"
+#ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Wfloat-equal"
+#endif
+#ifdef __clang__
+#pragma clang diagnostic ignored "-Wfloat-equal"
+#endif
 
  /* same semantics as strtol */
 long long
@@ -315,7 +319,7 @@ yajl_do_parse(yajl_handle hand, const unsigned char * jsonText,
                             yajl_buf_append(hand->decodeBuf, buf, bufLen);
                             buf = yajl_buf_data(hand->decodeBuf);
                             errno = 0;
-                            d = strtod((char *) buf, NULL);
+                            d = strtod((const char *) buf, NULL);
                             if ((d == HUGE_VAL || d == -HUGE_VAL) &&
                                 errno == ERANGE)
                             {
@@ -493,6 +497,8 @@ yajl_do_parse(yajl_handle hand, const unsigned char * jsonText,
                     goto around_again;
             }
         }
+        default:
+            break;
     }
 
     abort();

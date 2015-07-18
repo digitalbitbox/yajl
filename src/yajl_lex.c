@@ -41,8 +41,8 @@ tokToStr(yajl_tok tok)
         case yajl_tok_right_bracket: return "bracket";
         case yajl_tok_string: return "string";
         case yajl_tok_string_with_escapes: return "string_with_escapes";
+        default: return "unknown";
     }
-    return "unknown";
 }
 #endif
 
@@ -718,8 +718,8 @@ yajl_lex_error_to_string(yajl_lex_error error)
         case yajl_lex_unallowed_comment:
             return "probable comment found in input text, comments are "
                    "not enabled.";
+        default: return "unknown error code";
     }
-    return "unknown error code";
 }
 
 

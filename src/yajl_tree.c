@@ -29,6 +29,10 @@
 #define snprintf sprintf_s
 #endif
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
+
 #define STATUS_CONTINUE 1
 #define STATUS_ABORT    0
 
@@ -433,7 +437,7 @@ yajl_val yajl_tree_parse (const char *input,
     yajl_config(handle, yajl_allow_comments, 1);
 
     status = yajl_parse(handle,
-                        (unsigned char *) input,
+                        (const unsigned char *) input,
                         strlen (input));
     status = yajl_complete_parse (handle);
     if (status != yajl_status_ok) {
