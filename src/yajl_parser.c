@@ -31,6 +31,9 @@
 
 #define MAX_VALUE_TO_MULTIPLY ((LLONG_MAX / 10) + (LLONG_MAX % 10))
 
+#pragma clang diagnostic ignored "-Wfloat-equal"
+#pragma GCC diagnostic ignored "-Wfloat-equal"
+
  /* same semantics as strtol */
 long long
 yajl_parse_integer(const unsigned char *number, unsigned int length)

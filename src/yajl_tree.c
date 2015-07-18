@@ -480,6 +480,7 @@ void yajl_tree_free (yajl_val v)
 
     if (YAJL_IS_STRING(v))
     {
+        memset(v->u.string, 0, strlens(v->u.string));
         free(v->u.string);
         free(v);
     }

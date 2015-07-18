@@ -31,7 +31,7 @@
 #ifndef YAJL_TREE_H
 #define YAJL_TREE_H 1
 
-#include <yajl/yajl_common.h>
+#include "yajl_common.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -54,6 +54,8 @@ typedef enum {
 
 #define YAJL_NUMBER_INT_VALID    0x01
 #define YAJL_NUMBER_DOUBLE_VALID 0x02
+
+#define strlens(s) (s == NULL ? 0 : strlen(s))
 
 /** A pointer to a node in the parse tree */
 typedef struct yajl_val_s * yajl_val;
