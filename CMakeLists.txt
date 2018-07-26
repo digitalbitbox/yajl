@@ -64,11 +64,15 @@ ENDIF (WIN32)
 
 
 ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(test)
-ADD_SUBDIRECTORY(reformatter)
-ADD_SUBDIRECTORY(verify)
-ADD_SUBDIRECTORY(example)
-ADD_SUBDIRECTORY(perf)
+IF (NOT BUILD_TYPE STREQUAL "firmware")
+  ADD_SUBDIRECTORY(test)
+  ADD_SUBDIRECTORY(reformatter)
+  ADD_SUBDIRECTORY(verify)
+  ADD_SUBDIRECTORY(example)
+  ADD_SUBDIRECTORY(perf)
+ELSE ()
+  MESSAGE (STATUS "Ignoring test, reformatter, verify, example and perf in firmware build.")
+ENDIF ()
 
 INCLUDE(YAJLDoc.cmake)
 
